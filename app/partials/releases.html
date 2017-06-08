@@ -1,0 +1,114 @@
+<div id="newreleases" class="container">
+	<ul class="menu flexileft" id="submenu">
+		<a href="#/releases/{{page.path}}" ng-repeat="page in pages" ng-class="{active:isActive(page.path,2)}">{{page.label}}</a>
+		<div style='clear: both;'></div>
+	</ul>
+	<div class="description flexileft" ng-show="descriptions[currentPage]">
+		{{descriptions[currentPage]}}
+		<span ng-show="currentPage=='latest'"> (<a href="#/artists">Edit</a>)</span>
+	</div>
+	<div class="submenu flexileft" ng-show="currentPage=='explore'">
+		<span class="dropdown">
+			<a href class="dropdown-toggle">{{labels[currentSource]}}<span class="caret"></span></a>
+	      	<ul class="dropdown-menu">
+	       		<li ng-repeat="source in sources">
+	          		<a href="#/releases/explore/{{source}}/{{currentView}}/{{currentFilter}}">{{labels[source]}}</a>
+	        	</li>
+	      	</ul>
+	    </span>		
+		<span class="dropdown">
+			<a href class="dropdown-toggle">{{labels[currentView]}}<span class="caret"></span></a>
+	      	<ul class="dropdown-menu dropdown-menu-right">
+	       		<li ng-repeat="view in views">
+	          		<a href="#/releases/explore/{{currentSource}}/{{view}}/{{currentFilter}}">{{labels[view]}}</a>
+	        	</li>
+	      	</ul>
+	    </span>
+	    <span class="dropdown">
+			<a href class="dropdown-toggle">{{labels[currentFilter]}}<span class="caret"></span></a>
+	      	<ul class="dropdown-menu dropdown-menu-right">
+	       		<li ng-repeat="filter in filters">
+	          		<a href="#/releases/explore/{{currentSource}}/{{currentView}}/{{filter}}">{{labels[filter]}}</a>
+	        	</li>
+	      	</ul>
+	    </span>
+	</div>
+	<div class="albums">
+		<div class="section" ng-repeat="section in sections">
+			<div class="divider flexileft">{{section.title}}</div>
+			<div class="album" 
+				ng-repeat="album in section.albums" 
+				ng-class="{open:album.open}"
+				ng-hide="hidden[currentPage]&&hidden[currentPage].indexOf(album.artist.status)>=0">
+				<div class="albumimage" 
+						title="{{album.artist.name}} - {{album.name}}" 
+						style="background-image:url({{album.image}})" 			
+						ng-click="album.open=!album.open;"
+						ng-mouseover="hovered(album,true)"
+						ng-mouseleave="hovered(album,false)">
+					<div class="albumactions">
+						<a class="albumaction icon-spotify"
+							ng-class="{mini:$root.desktop}" 
+							ng-click="$root.externalLink('OpenSpotifyAlbum','spotify:album:'+album.id); $event.preventDefault()"
+							ng-href="spotify:album:{{album.id}}">
+							Open<span ng-hide="$root.desktop"> in Spotify</span>
+						</a>
+						<div class="albumaction mini ion-play" 
+							ng-show="$root.desktop" 
+							ng-click="playAlbum(album)">
+							Listen
+						</div>
+						<div class="albumaction ion-plus-circled" 
+							ng-class="{active:album.added}"
+							ng-click="$root.addToSpotify('spotify:album:'+album.id); album.added=true; $event.stopPropagation()"> Add to Spotify</div>
+						<div class="albumaction ion-checkmark-circled" 
+							ng-click="$root.rateArtist(album.artist,1); album.open=false" 
+							ng-hide="[1,4,6].indexOf(album.artist.status)!=-1"> Track Artist</div>
+						<div class="albumaction ion-close-circled" 
+							ng-click="$root.rateArtist(album.artist,2); album.open=false" 
+							ng-hide="album.artist.status==2"> Not Interested</div>
+						<div class="albumaction ion-help-circled" 
+							ng-click="$root.rateArtist(album.artist,0); album.open=false" 
+							ng-hide="[0,3].indexOf(album.artist.status)!=-1"> Unknown Artist</div>
+					</div>
+				</div>
+				<a 	ng-href="#/artist/{{album.artist.id}}" 
+					class="albumlink albumartist ion-person" 
+					title="{{album.artist.name}}">
+					{{album.artist.name}}
+				</a>
+				<a href="spotify:album:{{album.id}}"
+					ng-click="$root.externalLink('OpenSpotifyAlbum','spotify:album:'+album.id); $event.preventDefault()"
+					class="albumlink albumtitle {{album.type=='album'?'ion-disc':'ion-ios7-musical-note'}}" 
+					title="{{album.name}}">
+					{{album.name}}
+				</a>				
+			</div>
+			<div style='clear: both;'></div>
+			<div ng-show="section.capped" class="sectionmore" ng-click="moreAlbums(false,section)">
+				<span ng-show="section.busy" class="ion-loading-c"></span>
+				Show more from {{section.title}}
+			</div>
+		</div>
+		<div class="section" ng-repeat="section in upcomingsections">
+			<div class="divider flexileft">{{section.title}}</div>
+			<div class="upcoming" ng-repeat="album in section.albums">
+				<div class="upcomingimage" style="background-image:url('http://img.swarm.fm/img/album/126s/{{album.artist}}/{{album.album}}.png')"></div>
+				<div class="upcomingdetails">
+					<div class="upcomingdate">{{album.due}}</div>
+					<a class="upcomingartist" href="#/artist/{{album.id}}">{{album.artist}}</a>
+					<div class="upcomingalbum">{{album.album}}</div>
+				</div>
+			</div>
+		</div>
+		<div class="message" ng-show="busy"><span class="ion-loading-c"></span> Loading more</div>
+		<div class="message" ng-show="finished">
+			No more albums. 
+			<a href="#/artists/suggestions">Add Artists</a> to get better results.
+		</div>
+		<div class="toast" ng-show="$root.toast">
+			Added to your 
+			<a href="spotify:user:{{$root.user.username}}:playlist:{{$root.user.playlist}}">Spotify Playlist</a>
+		</div>
+	</div>
+</div>

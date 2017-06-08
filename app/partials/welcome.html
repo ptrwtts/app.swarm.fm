@@ -1,0 +1,25 @@
+<div id="welcome">
+	<div id="landing" ng-hide="$root.loggedIn">
+		<div><img id="landinglogo" src="/img/logo.png"></div>
+		<div class="message" ng-show="$root.updateRequired">
+			The app has been updated. Please login again. Sorry for the trouble!
+		</div>
+		<div id="tagline"><span>New Releases</span> and <span>Concerts</span> from <span>Artists you love</span>.</div>
+		<button ng-click="login()"id="loginbutton" class="btn spotify">Login with Spotify</button><br>
+		<div class="screenshot">
+			<img src="/img/releases.png">
+		</div>
+		<div class="screenshot">
+			<img  src="/img/concerts.png">
+		</div>
+		<div class="message">
+			<a href="https://medium.com/@ptrwtts/swarm-fm-update-325df0b6b719" target="_blank"
+				ng-click="$root.outboundLink('ViewInformationLink','https://medium.com/@ptrwtts/swarm-fm-update-325df0b6b719')">
+				Read about the new Swarm.fm
+			</a>
+		</div>
+	</div>
+	<div class="message" ng-show="importing">
+		<span class="ion-loading-c"></span> Importing artists from your playlists
+	</div>
+</div>

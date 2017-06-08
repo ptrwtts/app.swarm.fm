@@ -1,0 +1,25 @@
+<div id="artists" class="container">
+	<ul class="menu" id="submenu">
+		<a href="#/artists/{{view.path}}" ng-repeat="view in views" ng-class="{active:isActive(view.path,1)}">{{view.label}}</a>
+		<div style='clear: both;'></div>
+	</ul>
+	<div class="description" ng-show="descriptions[currentSource]">{{descriptions[currentSource]}}</div>
+	<div class="itemlist">
+		<a class="artist" 
+			ng-repeat="artist in artists" 
+			href="#/artist/{{artist.id}}" 
+			ng-hide="hidden[currentSource]&&hidden[currentSource].indexOf(artist.status)!=-1">
+			<span class="itemtitle">{{artist.name}}</span>
+			<span class="artistbutton {{rating.icon}}"
+				ng-class="{active:artist.status==rating.status}"
+				ng-repeat="rating in ratings" 
+				ng-hide="options[currentSource].indexOf(rating.status)==-1" 
+				ng-click="$root.rateArtist(artist,rating.status); $event.preventDefault()"></span>
+		</a>		
+	</div>
+</div>
+<div class="message" ng-show="busy"><span class="ion-loading-c"></span> Loading more</div>
+<div class="message" ng-show="finished">
+	No more artists.
+	<span ng-hide="currentSource=='suggestions'"> Browse the <a href="#/artists/suggestions">suggestions</a> to find more.</span>
+</div>

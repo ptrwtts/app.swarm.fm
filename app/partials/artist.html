@@ -1,0 +1,42 @@
+<div id="artist" class="container" ng-show="artist">
+	<div class="artistinfo">
+		<a href="spotify:artist:{{artist.id}}" class="artistimage"
+			ng-click="$root.outboundLink('OpenSpotifyArtist','spotify:artist:'+artist.id)"
+			style="background-image:url('{{artist.image}}')"
+		</a>
+		<a href="spotify:artist:{{artist.id}}" class="artistname" 
+			ng-click="$root.outboundLink('OpenSpotifyArtist','spotify:artist:'+artist.id)">
+			{{artist.name}}
+		</a>
+		<div class="artistactions">
+			<span ng-repeat="rating in ratings" 
+				class="artistbutton {{rating.icon}}"
+				ng-class="{active:artist.status==rating.status}"				
+				ng-hide="options[currentSource].indexOf(rating.status)==-1" 
+				ng-click="$root.rateArtist(artist,rating.status); $event.preventDefault()"></span>
+		</div>
+	</div>
+	<div class="heading" ng-show="concerts">Nearby Concerts</div>
+		<a class="concert concertdetails" 
+			ng-repeat="concert in concerts"
+			href="https://www.songkick.com/concerts/{{concert.event}}"
+			ng-click="$root.outboundLink('ViewSongkickDetails','https://www.songkick.com/concerts/'+concert.event)"
+			target="songkick">
+			{{concert.start}} @ {{concert.venue}}
+		</a>
+		<div style='clear: both;'></div>
+	<div class="heading" ng-show="similars">Related Artists</div>
+	<div class="itemlist related" ng-show="similars">
+		<a class="artist" 
+			ng-repeat="similar in similars" 
+			href="#/artist/{{similar.id}}" 
+			ng-hide="hidden[currentSource]&&hidden[currentSource].indexOf(similar.status)!=-1">
+			<span class="itemtitle">{{similar.name}}</span>
+			<span class="artistbutton {{rating.icon}}"
+				ng-class="{active:similar.status==rating.status}"
+				ng-repeat="rating in ratings" 
+				ng-hide="options[currentSource].indexOf(rating.status)==-1" 
+				ng-click="$root.rateArtist(similar,rating.status); $event.preventDefault()"></span>
+		</a>
+	</div>
+</div>

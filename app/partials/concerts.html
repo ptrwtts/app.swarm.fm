@@ -1,0 +1,70 @@
+<div id="concerts" class="container">
+	<ul class="menu" id="submenu">
+		<a href="#/concerts/myartists" ng-class="{active:isActive('myartists',2)}">My Artists</a>
+		<!--<a href="#/concerts/new" ng-class="{active:isActive('new',2)}">Recently Announced</a>-->
+		<a href="#/concerts/all" ng-class="{active:isActive('all',2)}">All Artists</a>
+		<div style='clear: both;'></div>
+	</ul>
+	<div class="description" ng-show="descriptions[currentSource]">
+		{{descriptions[currentSource]}}
+		<span ng-show="area">in <a href="#/settings">{{area}}</a></span>
+	</div>
+	<div class="concerts">
+		<div class="section" ng-repeat="section in sections">
+			<div class="divider">{{section.title}}</div>
+			<div class="concert" 
+			ng-class="{open:concert.open}"
+			ng-repeat="concert in section.concerts">
+				<div class="concertdetails" 
+				target="sonkick"
+				ng-click="openConcert(concert)"
+				ng-hide="concert.open">		
+					<span class="concertday" ng-hide="currentSource=='new'">
+						{{concert.day}}
+					</span>
+					<span class="concertdate" ng-show="currentSource=='new'">
+						{{concert.date}}
+					</span>
+					<span ng-repeat="artist in concert.artists" class="concertartists">
+						<span class="concertartist">{{artist.name}}</span>
+						{{$last ? '' : ' + '}}
+					</span>			
+					<span class="concertvenue">		
+						 {{concert.venue}} 
+					</span>					
+				</div>
+				<div class="concertfull" ng-show="concert.open">
+					<div class="concertsummary" ng-click="concert.open=false">
+						{{concert.day}} {{concert.date}} @ {{concert.venue}}
+					</div>
+					<a class="concertlink" target="songkick" href="https://www.songkick.com/concerts/{{concert.id}}"
+						ng-click="$root.outboundLink('ViewSongkickDetails','https://www.songkick.com/concerts/'+concert.id)">
+						<span class="ion-information-circled"></span>
+						View info and tickets on Songkick
+					</a>
+					<a ng-repeat="artist in concert.artists"						
+					   	class="artist" 					
+					   	href="#/artist/{{artist.id}}" >
+						<span class="itemtitle">{{artist.name}}</span>
+						<span ng-repeat="rating in ratings"
+							  class="artistbutton {{rating.icon}}"
+							  ng-class="{active:artist.status==rating.status}"
+							  ng-hide="options[currentSource].indexOf(rating.status)==-1" 
+							  ng-click="$root.rateArtist(artist,rating.status); $event.preventDefault()">
+						</span>
+					</a>	
+				</div>
+				<div style='clear: both;'></div>
+			</div>
+			<div style='clear: both;'></div>
+		</div>
+		<div class="message" ng-show="busy"><span class="ion-loading-c"></span> Loading more</div>
+		<div class="message" ng-show="finished">
+			No more concerts. 
+			<a href="#/artists/suggestions">Add Artists</a> to get better results.
+		</div>
+		<div class="message" ng-show="finished">Powered by 
+			<a href="https://www.songkick.com" target="songkick" ng-click="$root.outboundLink('ViewInformationLink','https://www.songkick.com')">Songkick</a>.
+		</div>
+	</div>
+</div>

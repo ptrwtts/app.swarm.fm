@@ -1,0 +1,753 @@
+/* app css stylesheet */
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
+body {
+  background-color: #202020;
+  color:#fff;
+  font-size: 14px;
+  font-family: 'RobotoDraft', 'Roboto', Helvetica Neue,Helvetica,Arial,sans-serif;
+  -webkit-tap-highlight-color:  rgba(255, 255, 255, 0); 
+  overflow-y:scroll;
+  -webkit-font-smoothing: antialiased;
+}
+body.ready {
+  background-color: #121314;
+}
+body.playing {
+  padding-bottom: 120px;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
+.icon-spotify:before {
+  content: " ";
+  background-image: url('/img/spotify_64.png');
+  height: 12px;
+  width: 12px;
+  display: inline-block;
+  background-size: 12px;
+  background-repeat: no-repeat;
+  margin: 0px 0px -1px;
+}
+
+.description {
+  margin: 0 10px;
+  padding: 10px 0;
+  color: #eee;
+  font-style: italic;
+  font-size: 12px;
+}
+.description a {
+  text-decoration: underline;
+}
+#artists .description {
+  border-bottom: 1px solid #202020;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  background-color: #121314;
+}
+#artists.container {
+  max-width: 500px;
+}
+#artist.container {
+  max-width: 500px;
+}
+#concerts.container {
+  max-width: 500px;
+}
+#search.container {
+  max-width: 500px;
+}
+#settingscontainer {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+#player {
+  display: none;
+  position: fixed;
+  overflow: hidden;
+  bottom: 0px;
+  right: 20px;
+  height: 20px;
+  width: 248px;
+  -webkit-transition: height 0.7s;
+  background-color: #2d2c2c;
+  border: 1px solid #000;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  border-bottom: 0px;
+}
+.desktop #player {
+  display: block;
+}
+#player.open {
+  height: 348px;
+}
+#player iframe {
+  margin: -1px;
+}
+#playertoolbar {
+  text-align: center;
+  height: 20px;
+  font-size: 15px;
+  cursor: pointer;
+}
+.collapse { display: none; }
+.open .collapse { display: inline-block; }
+.open .expand { display: none; } 
+
+.divider {
+  font-size: 26px;
+  margin: 10px 2% 0;
+}
+
+#welcome {
+  text-align: center;
+  padding: 10px 0px;
+}
+#landinglogo {
+  width: 300px;
+  margin: -23px 0px -20px -50px;
+}
+#tagline {
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+#tagline span {
+  font-weight: bold;
+}
+.screenshot {
+  width: 300px;
+  display: inline-block;
+  margin: 10px 5px;
+}
+.screenshot img {
+  width: 300px;
+  display: inline-block;
+  border: 1px solid #111;
+}
+
+.btn {
+  border-radius: 500px;
+  font-size: 16px;
+  line-height: 1.5;
+  padding: 8px 25px 6px;
+  text-transform: uppercase;
+  border-width: 1px;
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  -webkit-user-select: none;
+}
+
+.btn.spotify {
+  color: #fff;
+  background-color: #84bd00;
+  border-color: #84bd00;
+}
+#welcome .spotify {
+  margin-bottom: 30px;
+}
+
+
+a {
+  color:#fff;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none;
+}
+
+#nav {
+  width: 400px;
+  margin: 0 auto;
+}
+#nav a {
+  width: 33%;
+  display: inline-block;
+  border-bottom: 0px;
+  font-size: 16px;
+}
+.concerts-link {
+  padding-left: 1%
+}
+
+.pagetitle {
+  display: none;
+}
+
+@media only screen and (max-width: 700px)  {   
+  #nav { 
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 2;
+    background-color: #202020;
+    padding: 10px 0;
+    border-top: 1px solid #393b40;
+    font-size: 16px;
+  } 
+  .pagetitle {
+    display: inline;
+  }
+  body {
+    padding-bottom: 45px;
+  }
+}
+
+
+
+.menu {
+  list-style: none;
+  padding: 10px 0 0;
+  margin: 0;
+  text-align: center;
+}
+
+#mainmenu {
+  font-size: 18px;
+  display: none;
+  background-color: #202020;
+  border-bottom: 1px solid #393b40;
+}
+.ready #mainmenu {
+  display: block;
+}
+
+#submenu {
+  font-size: 14px;
+  text-align: left;
+  margin: 0 10px;
+  border-bottom: 1px solid #202020; 
+}
+#submenu.menu > a {
+  margin-right: 13px;
+  padding: 5px 0 10px;
+}
+
+#sortmenu {
+  font-size: 12px;
+}
+
+.menu > a {
+  display: inline-block;
+}
+
+.menu > a.logout {
+  float:right;
+}
+
+.menu a {
+  opacity: 0.6;
+}
+
+.menu a:hover {
+  opacity: 1;
+  text-decoration: none;
+}
+
+.menu .active {
+  border-bottom: 2px solid #80b729;
+}
+
+.menu .active {
+  opacity: 1;
+}
+
+.submenu {
+  color:#bbb;
+  padding: 10px 0;
+  font-size: 13px;
+  margin: 0;
+  text-align: left;
+}
+
+#settings {
+  float: right;
+  padding: 0px 20px 7px 10px;
+  font-size: 20px;
+}
+#concertlocation {
+  margin: 10px auto 30px;
+  width: 300px;
+  text-align: left;
+  padding: 0 10px;
+}
+.currentmetro {
+  font-size: 18px;
+}
+#concertlocation .searchbar {
+  margin: 10px 0;
+}
+.metrosuggestion {  
+  display: block;
+  border-bottom: 1px solid #202020;  
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding: 8px 0;
+  cursor: pointer;
+}
+
+
+#searchbutton {
+  float: right;
+  padding: 0px 10px 7px;
+  font-size: 20px;
+}
+.searchstuff {
+  margin: 10px auto;
+  text-align: center;
+}
+.searchbar {
+  display: inline-block;
+  height: 27px;
+  padding: 4px 10px 4px;
+  color: #3e3e40;
+  background-color: #dfe0e6;
+  background-image: none;
+  border: 1px solid #dfe0e6;
+  border-radius: 5px;
+  box-shadow: none;
+  min-width: 250px;
+}
+.searchsubmit {
+  border-radius: 20px;
+  background: #fff;
+  color: #121314;
+  padding: 9px 15px;
+  display: inline-block;
+  margin-left: 10px;
+}
+
+#logo {
+  background-image: url('/img/transicon.png');
+  float: left;
+  height: 34px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin: -5px 0 0 18px;
+  opacity: 1;
+  padding-left: 30px;
+  line-height: 35px;
+  font-weight: normal;
+  color: #ddd;
+}
+
+.albums {
+
+}
+.album {
+  float:left;
+  text-align: center;
+  width: 17.9%;
+  margin: 0.5% 0 1.25% 1.75%;
+  font-size: 12px;
+  background-color: #222326;
+  position: relative;
+}
+.flexileft { margin-left: 1.75% !important; }
+
+@media only screen and (min-width: 600px) and (max-width: 800px)  {  
+  .album { 
+    width: 22.5%;
+    margin: 0.5% 0 1.5% 2%;
+  } 
+  .flexileft { margin-left: 2% !important; }
+}
+@media only screen and (min-width: 450px) and (max-width: 600px)  {  
+  .album { 
+    width: 29.33%;
+    margin: 1% 0 2% 3%;
+  } 
+  .flexileft { margin-left: 3% !important; }
+}
+@media only screen and (max-width: 450px)  {  
+  .album { 
+    width: 44%;
+    margin: 1% 0 3% 4%;
+  } 
+  .flexileft { margin-left: 4% !important; }
+}
+
+.albumimage {
+  display: block;
+  width: 100%;  
+  padding-top: 100%;
+  background-size: cover;
+}
+.albumlink {  
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.albumartist {
+  margin: 10px 5px 0;
+}
+.albumtitle {
+  color:#666;
+  margin: 5px 5px 10px;
+}
+.albumactions {
+  background-color: rgba(0,0,0,0.9);
+  position: absolute;
+  bottom: 57px;
+  left: 0;
+  right: 0;
+  -webkit-transition: height 0.2s;
+  transition: height 0.2s;
+}
+.albumaction {
+  display: block;
+  overflow: hidden;
+  border-top: 1px solid #222326; 
+  padding: 0;
+  height: 0;
+  font-size: 13px;
+  cursor: pointer;
+  clear: both;
+  -webkit-transition: height 0.2s, padding 0.2s;
+  transition: height 0.2s, padding 0.2s;
+}
+.album a.albumaction:hover {
+  text-decoration:none;
+}
+.albumaction.mini {
+  width: 50%;
+  float: left;
+  clear: none;
+}
+.albumaction.mini:nth-child(odd) {
+  border-right: 1px solid #222326; 
+  margin-right: -1px;
+}
+.open .albumaction {
+  height: inherit;
+  padding: 6% 0;
+}
+.album a:hover {
+  text-decoration: underline;
+}
+.toast {  
+  background-color: rgba(0,0,0,0.9);
+  position: fixed;
+  bottom: 50px;
+  left: 50%;
+  margin-left: -100px;
+  width: 220px;
+  border-radius: 50px;
+  padding: 10px;
+  text-align: center;
+}
+.toast a {
+  text-decoration: underline;
+}
+
+
+.itemlist a {
+  display: block;
+  border-bottom: 1px solid #202020;  
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin: 0 10px;
+}
+.itemtitle {
+  display: inline-block;
+  padding: 12px 0px 0px 0px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 55%;
+}
+.artistbutton {
+  cursor: pointer;
+  padding: 12px 15px;
+  float: right;
+}
+
+
+.ion-checkmark-circled.active {
+  color:#84BD00;
+}
+.ion-plus-circled.active {
+  color:#84BD00;
+}
+.ion-close-circled.active {
+  color:red;
+}
+.ion-heart.active {
+  color:red;
+}
+.ion-help-circled.active {
+  color:#aaa;
+}
+
+
+
+.message {
+  padding: 40px 10px;
+  text-align: center;
+}
+.message a {
+  text-decoration: underline;
+}
+
+
+/* Copied from Bootstrap */
+.dropdown {
+  position: relative;
+  border: 1px solid #393b40;
+  padding: 5px 10px;
+  border-radius: 50px;
+  margin: 0 4px 0 0;
+  background-color: #202020;
+}
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  float: left;
+  min-width: 160px;
+  padding: 5px 0;
+  margin: 5px 0 0;
+  font-size: 14px;
+  text-align: left;
+  list-style: none;
+  background-color: #fff;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0,0,0,.15);
+  border-radius: 4px;
+  -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+  box-shadow: 0 6px 12px rgba(0,0,0,.175);
+}
+.dropdown-menu-right {
+  right: 0;
+  left: auto;
+}
+.open>.dropdown-menu {
+  display: block;
+}
+.dropdown-menu>li>a {
+  display: block;
+  padding: 5px 20px;
+  clear: both;
+  font-weight: 400;
+  line-height: 1.42857143;
+  color: #333;
+  white-space: nowrap;
+}
+.caret {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin: -1px -2px 0 4px;
+  vertical-align: middle;
+  border-top: 4px solid;
+  border-right: 4px solid transparent;
+  border-left: 4px solid transparent;
+}
+
+
+.concerts {
+  padding: 0 10px;
+}
+.concerts .divider {
+  margin-left: 0px;
+}
+.concert {
+  color:#aaa;  
+  border-bottom: 1px solid #202020;
+}
+.concertvenue {
+  margin-left: 5px;
+}
+.concertdetails {  
+  padding: 6px 0px;
+  cursor: pointer;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.concertday {
+  display: inline-block;
+  min-width: 32px;
+}
+.concertdate {
+  display: inline-block;
+  min-width: 50px;
+}
+
+
+.concert.open {
+  padding-bottom: 6px;
+}
+.concertsummary {
+  padding: 6px 0 10px;
+  cursor: pointer;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.concertlink {
+  margin-left: 35px;
+  color: #aaa;
+}
+.concert .ion-information-circled {
+  color: #eee;
+}
+.concert .artist {
+  display: block;
+  clear: both;
+}
+.concert .artistbutton {
+  float: left;
+  padding: 12px 15px 6px;
+}
+.concert .artist .itemtitle {
+  float: left;
+  margin-left: 35px;
+  max-width: 45%;
+}
+.concertartist {
+  color: #fff;
+}
+.concertaction {
+  display: inline-block;
+  border: 1px solid #393b40;
+  border-radius: 20px;
+  cursor: pointer;
+  padding: 2px 6px;
+  margin: 6px 7px 5px 0;
+}
+
+.upcoming {
+  padding: 10px 0px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  border-bottom: 1px solid #202020;
+  margin: 0px 15px;
+}
+.upcomingimage {
+  float: left;
+  width: 75px;
+  height: 75px;
+  background-color: #222326;
+  background-size: cover;
+  margin-right: 12px;
+  border-radius: 50px;
+}
+.upcomingdetails {
+  display: inline-block;
+}
+.upcomingdate {
+  color: #666;
+  margin-top: 4px;
+  font-size: 12px;
+}
+.upcomingartist {
+  color: #fff;
+  cursor: pointer;
+  font-size: 20px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin: 2px 0;
+}
+.upcomingalbum {
+  color: #aaa;
+  font-size: 14px;
+}
+#dna {
+  text-align: justify;
+  padding: 5px;
+}
+.dnaartist {
+  display: block;
+  width: 160px;
+  text-align: left;
+  overflow: hidden;
+  float: left;
+  white-space: nowrap;
+}
+.dnaartist:nth-child(even) {
+  color: #aaa;
+}
+.dnaartist.open {
+  display: block;
+}
+
+.artistinfo {
+  padding: 10px;
+}
+.artistimage img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  float: left;
+}
+.artistimage {
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  float: left;
+  background-size: cover;
+}
+.artistname {
+  font-size: 22px;
+  display: block;
+  margin: 10px 0 0 115px;
+  line-height: 27px;
+}
+.artistactions {
+  display: inline-block;
+  margin-left: 3px;
+}
+#artist .concert {
+  display: block;
+  margin: 0 10px;
+  color: #fff;
+  padding: 9px 0;
+}
+#artist .itemtitle {
+  max-width: 43%;
+}
+.heading {
+  font-size: 16px;
+  margin: 30px 2% 0;
+  color: #888;
+  border-bottom: 1px solid #202020;
+  text-transform:uppercase;
+  padding-bottom: 3px;
+}
+.sectionmore {
+  display: block;
+  text-align: center;
+  margin: 10px auto;
+  width: 260px;
+  background: #222326;
+  cursor: pointer;
+  padding: 5px;
+}

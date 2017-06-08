@@ -1,0 +1,17 @@
+<div id="search" class="container">
+	<div class="searchstuff">
+		<input placeholder="Search for an Artist" class="searchbar">
+	</div>
+	<div class="itemlist">
+		<a class="artist" 
+			ng-repeat="artist in artists" 
+			href="#/artist/{{artist.id}}" >
+			<span class="itemtitle">{{artist.name}}</span>
+			<span class="artistbutton ion-{{rating.icon}}-circled"
+				ng-repeat="rating in ratings" 
+				ng-class="{active:(artist.status==rating.status||artist.status==rating.status+3)}" 
+				ng-click="$root.rateArtist(artist,rating.status); $event.preventDefault()"></span>
+		</a>		
+	</div>
+</div>
+	<div class="message" ng-show="empty"></span>No results</div>
